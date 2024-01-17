@@ -48,7 +48,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => "User logged in successfully",
-            // 'token' => $token,
+            'token' => $token,
             'user' => $user,
         ])->withCookie(cookie('access_token', $token, 60));
     }
@@ -61,5 +61,14 @@ class UserController extends Controller
         return response()->json([
             'message' => "User has been logged out"
         ])->withCookie(cookie('access_token', null, -1));
+    }
+
+    public function user(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'data' => $user
+        ]);
     }
 }

@@ -29,7 +29,11 @@ Route::prefix('/auth')->group(function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('auth/logout', [UserController::class, 'logout']);
+    Route::get('auth/user', [UserController::class, 'user']);
+
     Route::get('/', [TaskController::class, 'index']);
-    Route::get('/:id', [TaskController::class, 'show']);
+    Route::get('/{id}', [TaskController::class, 'show']);
     Route::post('/create', [TaskController::class, 'create']);
+    Route::put('/update/{id}', [TaskController::class, 'update']);
+    Route::delete('/delete/{id}', [TaskController::class, 'delete']);
 });

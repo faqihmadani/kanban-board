@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $validateData = $request->validate([
             "name" => "required|string|max:255",
-            "email" => "required|string|unique:users,email|max:255",
+            "email" => "required|email|string|unique:users,email|max:255",
             "password" => "required|string|min:8|confirmed"
         ]);
 
@@ -33,7 +33,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $validateData = $request->validate([
-            "email" => "required|string",
+            "email" => "required|string|email",
             "password" => "required|string"
         ]);
 
@@ -46,10 +46,11 @@ class UserController extends Controller
         $user = User::where('email', $validateData["email"])->first();
         $token = $user->createToken('kanban_token')->plainTextToken;
 
+        $response = User::where('email', $validateData["email"])->select('name')->first();
+
         return response()->json([
             'message' => "User logged in successfully",
-            'token' => $token,
-            'user' => $user,
+            'user' => $response,
         ])->withCookie(cookie('access_token', $token, 60));
     }
 

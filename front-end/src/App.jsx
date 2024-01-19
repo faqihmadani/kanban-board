@@ -27,7 +27,7 @@ function App() {
     <>
       <RouterProvider router={router}></RouterProvider>
       <Toaster
-        position="top-center"
+        position="bottom-right"
         reverseOrder={false}
         gutter={8}
         containerClassName=""

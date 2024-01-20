@@ -46,12 +46,14 @@ class UserController extends Controller
         $user = User::where('email', $validateData["email"])->first();
         $token = $user->createToken('kanban_token')->plainTextToken;
 
-        $response = User::where('email', $validateData["email"])->select('name')->first();
+        // $response = User::where('email', $validateData["email"])->select('name')->first();
 
         return response()->json([
             'message' => "User logged in successfully",
-            'user' => $response,
-        ])->withCookie(cookie('access_token', $token, 60));
+            'user' => $user,
+            'token' => $token
+        ]);
+        // ->withCookie(cookie('access_token', $token, 60));
     }
 
     public function logout(Request $request)
@@ -61,7 +63,8 @@ class UserController extends Controller
 
         return response()->json([
             'message' => "User has been logged out"
-        ])->withCookie(cookie('access_token', null, -1));
+        ]);
+        // ->withCookie(cookie('access_token', null, -1));
     }
 
     public function user(Request $request)

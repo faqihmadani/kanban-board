@@ -66,8 +66,8 @@ function Login() {
 
     return (
         <div className='h-screen font-serif w-screen flex items-center justify-end bg-gradient-to-br from-purple-950 to-pink-600'>
-            <div className='bg-slate-50 h-full px-32 flex items-center justify-center'>
-                <div className='md:w-3/4flex items-center justify-center flex-col'>
+            <div className='bg-slate-50 h-full px-10 md:px-32 flex items-center justify-center'>
+                <div className='flex items-center justify-center flex-col'>
                     <h1 className='text-2xl font-bold text-slate-900 text-center'>Login to your account</h1>
                     <form className='mt-7 w-full gap-y-3 flex flex-col relative'>
                         <input onChange={handleChange} name='email' type="email" placeholder='Email' className='p-2 border-[2px] border-purple-800' />

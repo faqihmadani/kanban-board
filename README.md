@@ -17,6 +17,7 @@ Kanban board app to manage your tasks.
 - Create Task
 - Update Task
 - Delete Task
+- Drag and Drop Task
 
 ## Installation
 

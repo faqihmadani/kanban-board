@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FaPlusCircle } from "react-icons/fa";
 import { AuthContext } from '../context/AuthContext.jsx';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddTaskModal from '../components/AddTaskModal.jsx';
 import ShowTaskModal from '../components/ShowTaskModal.jsx';
+import TasksContainer from '../components/TasksContainer.jsx';
+
+export const ItemTypes = {
+    TASK: 'task'
+}
 
 function Home() {
     const [tasks, setTasks] = useState([])
@@ -68,74 +72,10 @@ function Home() {
                 </nav>
 
                 <div className='mt-10 container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 px-2 md:px-0'>
-                    <div className='bg-slate-50 w-full min-h-[450px] p-5 shadow-lg'>
-                        <h1 className='text-xl font-semibold'>To Do</h1>
-                        <button onClick={() => handleOpenModal('todo')} className='w-full py-3 text-slate-50 flex items-center justify-center mt-5 bg-purple-700 hover:bg-purple-800 gap-2'>
-                            <div className='text-xl'>
-                                <FaPlusCircle />
-                            </div>
-                            <h1 className='font-semibold'>Add Task</h1>
-                        </button>
-
-                        <div className='mt-5 flex flex-col-reverse gap-2'>
-                            {tasks.map((task) => {
-                                if (task.category === 'todo') {
-                                    return <h1 key={task.id} onClick={() => handleOpenTaskModal(task.category, task.id)} className='p-3 cursor-pointer font-medium capitalize w-full bg-purple-950 text-slate-50'>{task.title}</h1>
-                                }
-                            })}
-                        </div>
-                    </div>
-
-                    <div className='bg-slate-50 w-full min-h-[450px] p-5 shadow-lg'>
-                        <h1 className='text-xl font-semibold'>In Progress</h1>
-                        <button onClick={() => handleOpenModal('progress')} className='w-full py-3 text-slate-50 flex items-center justify-center mt-5 bg-purple-700 hover:bg-purple-800 gap-2'>
-                            <div className='text-xl'>
-                                <FaPlusCircle />
-                            </div>
-                            <h1 className='font-semibold'>Add Task</h1>
-                        </button>
-                        <div className='mt-5 flex flex-col-reverse gap-2'>
-                            {tasks.map((task) => {
-                                if (task.category === 'progress') {
-                                    return <h1 key={task.id} onClick={() => handleOpenTaskModal(task.category, task.id)} className='p-3 cursor-pointer font-medium capitalize w-full bg-purple-950 text-slate-50'>{task.title}</h1>
-                                }
-                            })}
-                        </div>
-                    </div>
-
-                    <div className='bg-slate-50 w-full min-h-[450px] p-5 shadow-lg'>
-                        <h1 className='text-xl font-semibold'>Testing</h1>
-                        <button onClick={() => handleOpenModal('testing')} className='w-full py-3 text-slate-50 flex items-center justify-center mt-5 bg-purple-700 hover:bg-purple-800 gap-2'>
-                            <div className='text-xl'>
-                                <FaPlusCircle />
-                            </div>
-                            <h1 className='font-semibold'>Add Task</h1>
-                        </button>
-                        <div className='mt-5 flex flex-col-reverse gap-2'>
-                            {tasks.map((task) => {
-                                if (task.category === 'testing') {
-                                    return <h1 key={task.id} onClick={() => handleOpenTaskModal(task.category, task.id)} className='p-3 cursor-pointer font-medium capitalize w-full bg-purple-950 text-slate-50'>{task.title}</h1>
-                                }
-                            })}
-                        </div>
-                    </div>
-
-                    <div className='bg-slate-50 w-full min-h-[450px] p-5 shadow-lg'>
-                        <h1 className='text-xl font-semibold'>Done</h1>
-                        <button onClick={() => handleOpenModal('done')} className='w-full py-3 text-slate-50 flex items-center justify-center mt-5 bg-purple-700 hover:bg-purple-800 gap-2'>
-                            <div className='text-xl'>
-                                <FaPlusCircle />
-                            </div>
-                            <h1 className='font-semibold'>Add Task</h1>
-                        </button>
-                        <div className='mt-5 flex flex-col-reverse gap-2'>
-                            {tasks.map((task) => {
-                                if (task.category === 'done') {
-                                    return <h1 key={task.id} onClick={() => handleOpenTaskModal(task.category, task.id)} className='p-3 cursor-pointer font-medium capitalize w-full bg-purple-950 text-slate-50'>{task.title}</h1>
-                                }
-                            })}
-                        </div>
-                    </div>
+                    <TasksContainer getTasks={getTasks} tasks={tasks} status={'To Do'} category={'todo'} handleOpenModal={handleOpenModal} handleOpenTaskModal={handleOpenTaskModal} />
+                    <TasksContainer getTasks={getTasks} tasks={tasks} status={'In Progress'} category={'progress'} handleOpenModal={handleOpenModal} handleOpenTaskModal={handleOpenTaskModal} />
+                    <TasksContainer getTasks={getTasks} tasks={tasks} status={'Testing'} category={'testing'} handleOpenModal={handleOpenModal} handleOpenTaskModal={handleOpenTaskModal} />
+                    <TasksContainer getTasks={getTasks} tasks={tasks} status={'Done'} category={'done'} handleOpenModal={handleOpenModal} handleOpenTaskModal={handleOpenTaskModal} />
                 </div>
             </div> : <Navigate to={'/login'} />}
         </>

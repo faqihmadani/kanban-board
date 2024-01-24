@@ -64,7 +64,7 @@ function ShowTaskModal({ handleOpenTaskModal, id, category, getTasks }) {
                 }
             })
             // const data = await res.data.data
-            // console.log(res.data.data);
+            console.log(res.data.data);
 
             setTask((prev) => {
                 return { ...prev, ...res.data.data }

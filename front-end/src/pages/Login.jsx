@@ -49,6 +49,11 @@ function Login() {
                                         Register
                                     </Link>
                                 </p>
+                                <div className='text-center text-sm text-slate-500 mt-16'>
+                                    <p>Demo</p>
+                                    <p>Email : admin@email.com</p>
+                                    <p>Password : 12345678</p>
+                                </div>
                             </form>
                         </div>
                     </div>

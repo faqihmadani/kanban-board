@@ -96,6 +96,18 @@ class TaskController extends Controller
         }
     }
 
+    public function updateCategory(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'category' => 'required|string'
+        ]);
+
+        Task::where('id', $id)->update(['category' => $validateData['category']]);
+        return response()->json([
+            'message' => "Category has been updated"
+        ]);
+    }
+
     public function delete(Request $request, $id)
     {
         $user = $request->user();

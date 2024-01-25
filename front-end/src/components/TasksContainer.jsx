@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import TaskList from './TaskList'
 import { FaPlusCircle } from "react-icons/fa";
 import { useDrop } from 'react-dnd';
@@ -21,17 +21,7 @@ function TasksContainer({ tasks, category, status, handleOpenModal, handleOpenTa
     const addItemToCategory = async (item) => {
         try {
             if (item.category !== category) {
-                const task = await axios.get(`${import.meta.env.VITE_BASE_URL}/${item.id}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    }
-                })
-                // const data = await res.data.data
-
-                const updatedTask = { ...task.data.data, category: category };
-
-                const res = await axios.put(`${import.meta.env.VITE_BASE_URL}/update/${item.id}`, updatedTask, {
+                const res = await axios.put(`${import.meta.env.VITE_BASE_URL}/update/category/${item.id}`, { category: category }, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
